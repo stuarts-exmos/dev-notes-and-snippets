@@ -1,0 +1,3 @@
+To get a verbose log for an msi install.
+
+msiexec /i MyApplication.msi /l*v MyLogFile.txt
