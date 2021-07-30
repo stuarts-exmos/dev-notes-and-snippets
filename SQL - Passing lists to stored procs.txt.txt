@@ -1,0 +1,57 @@
+DB
+================================
+create type [dbo].[People] as table
+(
+	Name varchar(50),
+	Age int
+)
+
+create procedure [dbo].[addPeople]
+	@People PeopleList readonly
+as
+	...
+	
+	
+===============================
+C#
+================================
+
+public void AddPeople(List<Person> people)
+{
+	using (var sqlConnection = new SqlConnection(ConnectionString))
+	{
+		sqlConnection.Open();
+		using(var sqlCommand = new SqlCommand("[dbo].[addPeople]"))
+		{
+			sqlCommand.Connection = sqlConnection;
+			sqlCommand.CommandType = CommandType.StoredProcedure;
+			using (var table = new DataTable())
+			{
+				table.Columns.Add("Name", typeof(string));
+				table.Columns.Add("Age", typeof(int));
+				
+				foreach(var person in people)
+					table.Rows.Add(person.Name, person.Age);
+					
+				var parameters = new SqlParameter("@People", SqlDbType.Structured)
+										{
+											TypeName = "dbo.People",
+											Value = table
+										};
+				sqlCommand.Parameters.Add(parameters);
+				sqlCommand.ExecuteNonQuery();
+			}
+		}
+	}
+}
+
+public class Person
+{
+	public string Name { get; }
+	public int Age { get; }
+	public Person(string name, int age)
+	{
+		Name = name;
+		Age = age;
+	}
+}
