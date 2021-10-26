@@ -1,5 +1,0 @@
--- table value types
-grant execute on type:: [dbo].[foo] to [sentilan.bar]
-
--- stored procs
-grant execute on [spFoo] to [sentilan.bar]
