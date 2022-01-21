@@ -1,4 +1,4 @@
-This examples assumes you want o pass a list of people objects to the db stored proc. A person contains a name (string) and an age (int).
+This examples assumes you want to pass a list of people objects to the db stored proc. A person contains a name (string) and an age (int).
 
 First you need to create the type in the db to represet a Person.
 
