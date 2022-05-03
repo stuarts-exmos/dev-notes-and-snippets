@@ -1,0 +1,6 @@
+To add an inclusion:
+```
+*.bar
+!foo.bar
+```
+Would exclude all *.bar files except `foo.bar`
